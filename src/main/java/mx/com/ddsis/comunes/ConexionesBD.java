@@ -7,7 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import mx.com.ddsis.pojo.ConexionBase;
+
 import org.apache.log4j.Logger;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 
 public class ConexionesBD {
@@ -43,6 +46,43 @@ public class ConexionesBD {
 		}
 
 	}
-
+	
+	 public static boolean testConexionBD(String host, String port, String usr, String pass){
+	    	
+	    	ConexionBase cb = new ConexionBase();
+	    	cb.setDriverClassName("com.mysql.jdbc.Driver");
+	    	cb.setIpBase(host);
+	    	cb.setPassBD(pass);
+	    	cb.setPortBase(port);
+	    	cb.setUserBD(usr);    	
+	    	cb.setUrl("jdbc:mysql://"+host+":"+port+"/delta");
+	    	
+	    	try {
+				if(getDataSource(cb).getConnection() != null){
+					closeConnection(ConexionesBD.getDataSource(cb).getConnection(),null, null, null);
+					return true;
+				}
+			} catch (SQLException e) {
+				
+				logger.error("Error en los datos de conexión a la base:\n"+e);
+			}
+	    	
+	    	return false;
+	    }
+	 
+	 	public static DriverManagerDataSource getDataSource(ConexionBase conBase) {
+			
+		  DriverManagerDataSource dataSource = new DriverManagerDataSource();		
+		  dataSource.setDriverClassName(conBase.getDriverClassName());
+		
+		  dataSource.setUrl(conBase.getUrl());
+		
+		  dataSource.setUsername(conBase.getUserBD());
+		
+		  dataSource.setPassword(conBase.getPassBD());
+		
+		  return dataSource;
+		
+	}
 
 }

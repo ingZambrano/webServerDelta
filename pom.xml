@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>mx.com.ddsis</groupId>
-	<artifactId>serverDelta</artifactId>
+	<artifactId>webServerDelta</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>serverDelta</name>
+	<name>webServerDelta</name>
 	<description>Servicios Delta</description>
 
 	<parent>

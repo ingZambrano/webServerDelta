@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import mx.com.ddsis.comunes.Utilerias;
 import mx.com.ddsis.pojo.RegistroBruto;
 import mx.com.ddsis.pojo.RegistroMedida;
 
@@ -60,7 +61,7 @@ public class AlmacenDataImp implements AlmacenData {
 				+ "VALUES(?, STR_TO_DATE(?, '%Y/%m/%d %H:%i:%s'), STR_TO_DATE(?, '%Y/%m/%d %H:%i:%s'), ?, ?) ";
 		
 		String fhRegistro = df.format(regMedida.getFhRegistro());
-		String fhSensada = df.format(regMedida.getFhSensada());
+		String fhSensada = df.format(Utilerias.sumarRestarHorasFecha(regMedida.getFhSensada(),-6));
 		
 		ret = jdbcT.update(qUpdate, regMedida.getIdMagnitud(), fhRegistro, 
 				fhSensada, regMedida.getValorMagnitud(), regMedida.getIdDispositivo());

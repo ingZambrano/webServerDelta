@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -87,6 +88,15 @@ public class Utilerias {
 		return ret;
 	}
 	
+	 public static Date sumarRestarHorasFecha(Date fecha, int horas){
+		 	
+		 Calendar calendar = Calendar.getInstance();		 
+		 calendar.setTime(fecha);		 	
+		 calendar.add(Calendar.HOUR, horas);	
+		 return calendar.getTime();  	
+		  
+		 	
+	 }
 	
 
 }
